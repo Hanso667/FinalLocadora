@@ -221,7 +221,7 @@ public class frGeneros extends javax.swing.JDialog {
         GeneroController genero = new GeneroController();
 
         //consulta os usuários e guarda a lista de usuários que encontrou
-        List<Genero> listaGeneros = genero.consultar();
+        List<Genero> listaGeneros = genero.listar();
 
         //Preencher a grade
         //percorre todos os usuários presentes na lista

@@ -49,7 +49,7 @@ public class UsuarioController {
         return false;
     }
     
-    public List<Usuario> consultar() {
+    public List<Usuario> listar() {
     //Guarda o sql
     String sql = "SELECT * FROM usuarios";
     

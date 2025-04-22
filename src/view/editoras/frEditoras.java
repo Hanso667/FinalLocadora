@@ -227,7 +227,7 @@ public class frEditoras extends javax.swing.JDialog {
         EditoraController editora = new EditoraController();
 
         //consulta os usuários e guarda a lista de usuários que encontrou
-        List<Editora> listaEditoras = editora.consultar();
+        List<Editora> listaEditoras = editora.listar();
 
         //Preencher a grade
         //percorre todos os usuários presentes na lista

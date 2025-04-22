@@ -232,7 +232,7 @@ public class frUsuarios extends javax.swing.JDialog {
     UsuarioController user = new UsuarioController();
     
     //consulta os usuários e guarda a lista de usuários que encontrou
-    List<Usuario> listaUsuarios = user.consultar();
+    List<Usuario> listaUsuarios = user.listar();
     
     //Preencher a grade
     //percorre todos os usuários presentes na lista

@@ -235,7 +235,7 @@ public class frProdutores extends javax.swing.JDialog {
         ProdutorController produtor = new ProdutorController();
 
         //consulta os usuários e guarda a lista de usuários que encontrou
-        List<Produtor> listaProdutores = produtor.consultar();
+        List<Produtor> listaProdutores = produtor.listar();
 
         //Preencher a grade
         //percorre todos os usuários presentes na lista

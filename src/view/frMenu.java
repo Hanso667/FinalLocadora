@@ -9,7 +9,7 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import view.clientes.frClientes;
 import view.editoras.frEditoras;
-import view.estoque.frEstoque;
+import view.produtos.frEstoque;
 import view.produtores.frProdutores;
 import view.usuarios.frUsuarios;
 import view.venda.frVendas;

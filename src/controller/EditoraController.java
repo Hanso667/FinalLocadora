@@ -13,7 +13,7 @@ import model.Editora;
 
 public class EditoraController {
     
-    public List<Editora> consultar() {
+    public List<Editora> listar() {
     //Guarda o sql
     String sql = "SELECT * FROM editoras";
     

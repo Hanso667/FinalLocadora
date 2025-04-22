@@ -13,7 +13,7 @@ import model.Genero;
 
 public class GeneroController {
     
-    public List<Genero> consultar() {
+    public List<Genero> listar() {
     //Guarda o sql
     String sql = "SELECT * FROM generos";
     

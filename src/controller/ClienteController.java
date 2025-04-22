@@ -59,7 +59,7 @@ public class ClienteController {
     return cliente;
   }
     
-    public List<Cliente> consultar() {
+    public List<Cliente> listar() {
     //Guarda o sql
     String sql = "SELECT * FROM clientes";
     

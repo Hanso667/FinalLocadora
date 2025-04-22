@@ -234,7 +234,7 @@ public class frClientes extends javax.swing.JDialog {
         ClienteController cliente = new ClienteController();
 
         //consulta os usuários e guarda a lista de usuários que encontrou
-        List<Cliente> listaClientes = cliente.consultar();
+        List<Cliente> listaClientes = cliente.listar();
 
         //Preencher a grade
         //percorre todos os usuários presentes na lista

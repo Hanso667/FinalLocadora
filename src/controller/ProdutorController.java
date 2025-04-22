@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class ProdutorController {
     
-    public List<Produtor> consultar() {
+    public List<Produtor> listar() {
     //Guarda o sql
     String sql = "SELECT * FROM produtores";
     
