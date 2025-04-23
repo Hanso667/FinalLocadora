@@ -48,9 +48,10 @@ public class frProdutos extends javax.swing.JDialog {
         tblEstoque = new javax.swing.JTable();
         btnAlterar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
-        btnGeneros = new javax.swing.JButton();
+        btnAddGeneros = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
+        btnRemGenero = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -106,10 +107,10 @@ public class frProdutos extends javax.swing.JDialog {
             }
         });
 
-        btnGeneros.setText("Generos");
-        btnGeneros.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAddGeneros.setText("Adcionar Genero");
+        btnAddGeneros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGenerosMouseClicked(evt);
+                btnAddGenerosMouseClicked(evt);
             }
         });
 
@@ -127,6 +128,13 @@ public class frProdutos extends javax.swing.JDialog {
             }
         });
 
+        btnRemGenero.setText("Remover Genero");
+        btnRemGenero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRemGeneroMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel50Layout = new javax.swing.GroupLayout(jPanel50);
         jPanel50.setLayout(jPanel50Layout);
         jPanel50Layout.setHorizontalGroup(
@@ -134,7 +142,7 @@ public class frProdutos extends javax.swing.JDialog {
             .addGroup(jPanel50Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane25, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane25)
                     .addGroup(jPanel50Layout.createSequentialGroup()
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -142,9 +150,11 @@ public class frProdutos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
+                        .addComponent(btnAddGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel50Layout.setVerticalGroup(
@@ -154,9 +164,10 @@ public class frProdutos extends javax.swing.JDialog {
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnGeneros, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(btnAddGeneros, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(btnRemGenero, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
@@ -206,17 +217,17 @@ public class frProdutos extends javax.swing.JDialog {
         pesquisar();
     }//GEN-LAST:event_btnAlterarMouseClicked
 
-    private void btnGenerosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerosMouseClicked
+    private void btnAddGenerosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddGenerosMouseClicked
         if (tblEstoque.getSelectedRow() != -1) {
             int linhaSelecionada = tblEstoque.getSelectedRow();
             String textoCelula = tblEstoque.getValueAt(linhaSelecionada, 0).toString();
             int idProduto = Integer.parseInt(textoCelula);
-            new frAddGenero(this, rootPaneCheckingEnabled,idProduto).setVisible(true);
+            new frAddGenero(this, rootPaneCheckingEnabled, idProduto).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Nenhum genero selecionado");
         }
         pesquisar();
-    }//GEN-LAST:event_btnGenerosMouseClicked
+    }//GEN-LAST:event_btnAddGenerosMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         pesquisar();
@@ -236,7 +247,21 @@ public class frProdutos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Nenhum produto selecionado");
         }
     }//GEN-LAST:event_btnDeletarMouseClicked
-    
+
+    private void btnRemGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemGeneroMouseClicked
+
+        if (tblEstoque.getSelectedRow() != -1) {
+            GeneroController editora = new GeneroController();
+            int linhaSelecionada = tblEstoque.getSelectedRow();
+            String textoCelula = tblEstoque.getValueAt(linhaSelecionada, 0).toString();
+            int idProduto = Integer.parseInt(textoCelula);
+            new frRemoverGeneros(this, rootPaneCheckingEnabled,idProduto).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum genero selecionado");
+        }
+        pesquisar();
+    }//GEN-LAST:event_btnRemGeneroMouseClicked
+
     private void pesquisar() {
         //Pega o modelo da grade com suas colunas
         // o 
@@ -316,10 +341,11 @@ public class frProdutos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddGeneros;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnDeletar;
-    private javax.swing.JButton btnGeneros;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnRemGenero;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel49;
     private javax.swing.JPanel jPanel50;

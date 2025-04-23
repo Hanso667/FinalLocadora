@@ -38,7 +38,7 @@ CREATE TABLE `produto_genero` (
 
 LOCK TABLES `produto_genero` WRITE;
 /*!40000 ALTER TABLE `produto_genero` DISABLE KEYS */;
-INSERT INTO `produto_genero` VALUES (1,1),(2,1),(3,1),(8,9),(30,9);
+INSERT INTO `produto_genero` VALUES (2,1),(3,1),(8,9),(30,9);
 /*!40000 ALTER TABLE `produto_genero` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-23 11:06:21
+-- Dump completed on 2025-04-23 16:46:41

@@ -82,17 +82,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane25" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane25" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="btnNovo" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="btnAlterar" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnDeletar" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnGeneros" min="-2" pref="70" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="btnVoltar" pref="111" max="32767" attributes="0"/>
+                              <Component id="btnAddGeneros" min="-2" pref="124" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnRemGenero" min="-2" pref="124" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnVoltar" min="-2" pref="161" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -106,9 +108,10 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAlterar" alignment="3" pref="68" max="32767" attributes="0"/>
                           <Component id="btnNovo" alignment="3" pref="68" max="32767" attributes="0"/>
-                          <Component id="btnGeneros" alignment="3" pref="68" max="32767" attributes="0"/>
+                          <Component id="btnAddGeneros" alignment="3" pref="68" max="32767" attributes="0"/>
                           <Component id="btnVoltar" alignment="3" pref="68" max="32767" attributes="0"/>
                           <Component id="btnDeletar" alignment="3" pref="68" max="32767" attributes="0"/>
+                          <Component id="btnRemGenero" alignment="3" pref="68" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane25" pref="200" max="32767" attributes="0"/>
@@ -212,12 +215,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNovoMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnGeneros">
+            <Component class="javax.swing.JButton" name="btnAddGeneros">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Generos"/>
+                <Property name="text" type="java.lang.String" value="Adcionar Genero"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGenerosMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddGenerosMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnVoltar">
@@ -234,6 +237,14 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDeletarMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnRemGenero">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Remover Genero"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRemGeneroMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
