@@ -4,7 +4,9 @@
  */
 package view.produtos;
 
+import controller.ProdutoController;
 import javax.swing.JOptionPane;
+import model.Produto;
 
 /**
  *
@@ -290,12 +292,12 @@ public class frNovoProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelMouseClicked
 
     private void btnConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmMouseClicked
-        /*    if (gravar()) {
+            if (gravar()) {
             JOptionPane.showMessageDialog(null, "Produtor inserido com sucesso");
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "erro ao inserir o Produtor");
-       } */
+       } 
     }//GEN-LAST:event_btnConfirmMouseClicked
 
     private void txtEditoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEditoraFocusLost
@@ -307,13 +309,42 @@ public class frNovoProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_txtProdutorFocusLost
 
     private void btnPProdutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPProdutorMouseClicked
-        // procurar pelo id + nome dos produtores e dar display em uma jtable para seleção
+       int value = new frSelProdutor(this, rootPaneCheckingEnabled).getValue();
+       txtProdutor.setText(String.valueOf(value));
     }//GEN-LAST:event_btnPProdutorMouseClicked
 
     private void btnPEditoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPEditoraMouseClicked
-        // procurar pelo id + nome das editoras e dar display em uma jtable para seleção
+       int value =new frSelEditora(this, rootPaneCheckingEnabled).getValue();
+       txtEditora.setText(String.valueOf(value));
     }//GEN-LAST:event_btnPEditoraMouseClicked
 
+    public boolean gravar(){
+        ProdutoController prodC = new ProdutoController();
+        Produto prod = new Produto();
+        String nome = txtTitulo.getText();
+        String editora = txtEditora.getText();
+        String produtor = txtProdutor.getText();
+        double preco = Double.valueOf(txtPreco.getText());
+        int quantidade = Integer.valueOf(txtQuantidade.getText());
+        int ano = Integer.valueOf(txtAnoLançamento.getText());
+        int duracao = Integer.valueOf(txtDuracao.getText());
+
+
+        prod.setTitulo(nome);
+        prod.setAno(ano);
+        prod.setDuracao(duracao);
+        prod.setEditora(editora);
+        prod.setProdutor(produtor);
+        prod.setPreco(preco);
+        prod.setQuantidade(quantidade);
+
+        if (prodC.inserirProduto(prod)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

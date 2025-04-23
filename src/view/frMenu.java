@@ -9,7 +9,8 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import view.clientes.frClientes;
 import view.editoras.frEditoras;
-import view.produtos.frEstoque;
+import view.generos.frGeneros;
+import view.produtos.frProdutos;
 import view.produtores.frProdutores;
 import view.usuarios.frUsuarios;
 import view.venda.frVendas;
@@ -48,14 +49,23 @@ public class frMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnprodutores = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnEstoque = new javax.swing.JButton();
         btnVendas = new javax.swing.JButton();
-        btnprodutores = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
         btnEditoras = new javax.swing.JButton();
+        btnGeneros = new javax.swing.JButton();
+        btnprodutores2 = new javax.swing.JButton();
+
+        btnprodutores.setText("Produtores");
+        btnprodutores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnprodutoresMouseClicked(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,13 +85,6 @@ public class frMenu extends javax.swing.JFrame {
         btnVendas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVendasMouseClicked(evt);
-            }
-        });
-
-        btnprodutores.setText("Produtores");
-        btnprodutores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnprodutoresMouseClicked(evt);
             }
         });
 
@@ -106,6 +109,20 @@ public class frMenu extends javax.swing.JFrame {
             }
         });
 
+        btnGeneros.setText("Generos");
+        btnGeneros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerosMouseClicked(evt);
+            }
+        });
+
+        btnprodutores2.setText("Produtores");
+        btnprodutores2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnprodutores2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -114,16 +131,18 @@ public class frMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditoras, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnprodutores, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(btnprodutores2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,9 +152,10 @@ public class frMenu extends javax.swing.JFrame {
                     .addComponent(btnVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnprodutores, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditoras, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditoras, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnprodutores2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -175,7 +195,7 @@ public class frMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendasMouseClicked
 
     private void btnEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstoqueMouseClicked
-        new frEstoque(this, rootPaneCheckingEnabled).setVisible(true);
+        new frProdutos(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_btnEstoqueMouseClicked
 
     private void btnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseClicked
@@ -195,8 +215,16 @@ public class frMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
     private void btnEditorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditorasMouseClicked
-        new frProdutores(this, rootPaneCheckingEnabled).setVisible(true);
+        new frEditoras(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_btnEditorasMouseClicked
+
+    private void btnGenerosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerosMouseClicked
+        new frGeneros(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_btnGenerosMouseClicked
+
+    private void btnprodutores2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnprodutores2MouseClicked
+        new frProdutores(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_btnprodutores2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -237,9 +265,11 @@ public class frMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnEditoras;
     private javax.swing.JButton btnEstoque;
+    private javax.swing.JButton btnGeneros;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnVendas;
     private javax.swing.JButton btnprodutores;
+    private javax.swing.JButton btnprodutores2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

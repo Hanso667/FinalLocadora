@@ -7,6 +7,8 @@ package view.generos;
 
 import controller.EditoraController;
 import controller.GeneroController;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +27,11 @@ public class frGeneros extends javax.swing.JDialog {
     public frGeneros(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width + 17;
+        int screenHeight = screenSize.height - 163;
+        this.setSize(screenWidth, screenHeight);
+        this.setLocation(-10, 123);
     }
 
     /**

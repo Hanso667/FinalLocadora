@@ -9,14 +9,59 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Produtor;
+import model.Produto;
 import java.util.Date;
 
 public class ProdutoController {
     
-    public List<Produtor> listar() {
+    public Produto consultar(int id){
+   
+    String sql = "SELECT * FROM produtos";
+    
+    GerenciadorConexao gerenciador = new GerenciadorConexao();
+    
+    PreparedStatement comando = null;
+    ResultSet resultado = null;
+
+    Produto Produto = new Produto();
+    
+    try {
+
+      comando = gerenciador.prepararComando(sql);
+
+      resultado = comando.executeQuery();
+
+      Produto produto = new Produto();
+      
+      if (resultado.next()) {
+
+        produto.setId(resultado.getInt("id_produto"));
+        produto.setTitulo(resultado.getString("titulo"));
+        produto.setAno(resultado.getInt("ano_lancamento"));
+        produto.setEditora(resultado.getString("id_editora"));
+        produto.setProdutor(resultado.getString("id_produtor"));
+        produto.setDuracao(resultado.getInt("duracao"));
+        produto.setPreco(resultado.getDouble("preco"));
+        produto.setQuantidade(resultado.getInt("estoque"));
+
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(ProdutorController.class.getName()).log(
+              Level.SEVERE, null, ex);
+    } finally {
+      gerenciador.fecharConexao(comando, resultado);
+    }
+
+    //retorno a lista de usuários
+    return Produto;
+    }
+    
+    public List<Produto> listar() {
     //Guarda o sql
-    String sql = "SELECT * FROM produtores";
+    String sql = "SELECT * FROM produtos as prod "
+               + "left join editoras as edt on edt.id_editora = prod.id_editora "
+               + "left join produtores as pdtr on pdtr.id_produtor = prod.id_produtor";
     
     //Cria um gerenciador de conexão
     GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -25,7 +70,7 @@ public class ProdutoController {
     ResultSet resultado = null;
     
     //Crio a lista de usuários vazia
-    List<Produtor> listaProdutores = new ArrayList<>();
+    List<Produto> listaProdutos = new ArrayList<>();
     
     try {
       //Preparo do comando sql
@@ -40,16 +85,20 @@ public class ProdutoController {
       while (resultado.next()) {
 
         //Crio um novo usuário vazio
-        Produtor produtor = new Produtor();
+        Produto produto = new Produto();
 
         //Leio as informações da variável resultado e guardo no usuário
-        produtor.setId(resultado.getInt("id_produtor"));
-        produtor.setNome(resultado.getString("nome"));
-        produtor.setNascimento(resultado.getDate("data_nascimento"));
-        produtor.setNacionalidade(resultado.getString("nacionalidade"));
+        produto.setId(resultado.getInt("prod.id_produto"));
+        produto.setTitulo(resultado.getString("prod.titulo"));
+        produto.setAno(resultado.getInt("prod.ano_lancamento"));
+        produto.setEditora(resultado.getString("edt.nome"));
+        produto.setProdutor(resultado.getString("pdtr.nome"));
+        produto.setDuracao(resultado.getInt("prod.duracao"));
+        produto.setPreco(resultado.getDouble("prod.preco"));
+        produto.setQuantidade(resultado.getInt("prod.estoque"));
 
         //adiciono o usuário na lista
-        listaProdutores.add(produtor);
+        listaProdutos.add(produto);
       }
 
     } catch (SQLException ex) {
@@ -60,14 +109,14 @@ public class ProdutoController {
     }
 
     //retorno a lista de usuários
-    return listaProdutores;
+    return listaProdutos;
   }
     
-    public boolean inserirProduto(Produtor prod) {
+    public boolean inserirProduto(Produto prod) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "INSERT INTO produtores(nome,data_nascimento,nacionalidade) "
-                + " VALUES (?,?,?) ";
+        String sql = "INSERT INTO produtos(titulo,ano_lancamento,duracao,id_editora,id_produtor,preco,estoque) "
+                + " VALUES (?,?,?,?,?,?,?) ";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -77,9 +126,13 @@ public class ProdutoController {
             //prepara o sql, analisando o formato e as váriaveis
             comando = gerenciador.prepararComando(sql);
             
-            comando.setString(1, prod.getNome());
-            comando.setDate(2, prod.getNascimento());
-            comando.setString(3, prod.getNacionalidade());
+            comando.setString(1, prod.getTitulo());
+            comando.setInt(2, prod.getAno());
+            comando.setInt(3, prod.getDuracao());
+            comando.setString(4, prod.getEditora());
+            comando.setString(5, prod.getProdutor());
+            comando.setInt(6, prod.getQuantidade());
+            comando.setDouble(7, prod.getPreco());
 
             //define o valor de cada variável(?) pela posição em que aparece no sql
             //Executa o insert
@@ -87,18 +140,18 @@ public class ProdutoController {
 
             return true;
         }catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao inserir o produtor: " + e.getMessage());//exibe popup com o erro
+            JOptionPane.showMessageDialog(null, "Erro ao inserir o produto: " + e.getMessage());//exibe popup com o erro
         } finally {//depois de executar o try, dando erro ou não executa o finally
             gerenciador.fecharConexao(comando);
         }
         return false;
     }
 
-    public boolean alterarProduto(Produtor prod, int id) {
+    public boolean alterarProduto(Produto prod, int id) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "UPDATE produtores "
-                   + "set nome = ?, data_nascimento = ?, nacionalidade = ? "
+        String sql = "UPDATE produtos "
+                   + "set titulo = ?, ano_lancamento = ?, duracao = ? , id_editora = ?, id_produtor = ?, estoque = ?, preco = ?"
                    + "where id_editora = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
@@ -110,10 +163,14 @@ public class ProdutoController {
             //prepara o sql, analisando o formato e as váriaveis
             comando = gerenciador.prepararComando(sql);
 
-            comando.setString(1, prod.getNome());
-            comando.setDate(2, prod.getNascimento());
-            comando.setString(3, prod.getNacionalidade());
-            comando.setInt(4, id);
+            comando.setString(1, prod.getTitulo());
+            comando.setInt(2, prod.getAno());
+            comando.setInt(3, prod.getDuracao());
+            comando.setString(4, prod.getEditora());
+            comando.setString(5, prod.getProdutor());
+            comando.setInt(6, prod.getQuantidade());
+            comando.setDouble(7, prod.getPreco());
+            comando.setInt(8, id);
 
             
             comando.executeUpdate();
@@ -121,7 +178,7 @@ public class ProdutoController {
 
             return true;
         } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar o produtor: " + e.getMessage());//exibe popup com o erro
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto: " + e.getMessage());//exibe popup com o erro
         } finally {//depois de executar o try, dando erro ou não executa o finally
             gerenciador.fecharConexao(comando);
         }
@@ -131,8 +188,8 @@ public class ProdutoController {
     public boolean removerProduto(int id) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "delete from produtores"
-                   + " where id_produtor = ?";
+        String sql = "delete from produtos"
+                   + " where id_produto = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -148,7 +205,7 @@ public class ProdutoController {
 
             return true;
         } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao remover o produtor: " + e.getMessage());//exibe popup com o erro
+            JOptionPane.showMessageDialog(null, "Erro ao remover o produto: " + e.getMessage());//exibe popup com o erro
         } finally {//depois de executar o try, dando erro ou não executa o finally
             gerenciador.fecharConexao(comando);
         }

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JButton" name="btnprodutores">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Produtores"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnprodutoresMouseClicked"/>
+      </Events>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -80,16 +90,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnVendas" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEstoque" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnClientes" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnUsuarios" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="btnEstoque" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnEditoras" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnprodutores" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <Component id="btnprodutores2" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnGeneros" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnUsuarios" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -101,9 +113,10 @@
                           <Component id="btnVendas" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                           <Component id="btnEstoque" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                           <Component id="btnClientes" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
-                          <Component id="btnprodutores" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                           <Component id="btnUsuarios" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                           <Component id="btnEditoras" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="btnGeneros" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="btnprodutores2" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -125,14 +138,6 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnVendasMouseClicked"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnprodutores">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Produtores"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnprodutoresMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnClientes">
@@ -157,6 +162,22 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEditorasMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnGeneros">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Generos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGenerosMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnprodutores2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Produtores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnprodutores2MouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

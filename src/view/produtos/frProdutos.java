@@ -4,19 +4,25 @@
  */
 package view.produtos;
 
+import controller.GeneroController;
+import controller.ProdutoController;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Produto;
 
 /**
  *
  * @author Cliente
  */
-public class frEstoque extends javax.swing.JDialog {
+public class frProdutos extends javax.swing.JDialog {
 
     /**
      * Creates new form frEstoque
      */
-    public frEstoque(java.awt.Frame parent, boolean modal) {
+    public frProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -45,6 +51,11 @@ public class frEstoque extends javax.swing.JDialog {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel49.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -53,20 +64,20 @@ public class frEstoque extends javax.swing.JDialog {
 
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "titulo", "preço", "quantidade", "editora", "produtor", "ano", "duração"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -176,6 +187,7 @@ public class frEstoque extends javax.swing.JDialog {
 
     private void btnNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNovoMouseClicked
         new frNovoProduto(null, rootPaneCheckingEnabled).setVisible(true);
+        pesquisar();
     }//GEN-LAST:event_btnNovoMouseClicked
 
     private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
@@ -183,9 +195,58 @@ public class frEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAlterarMouseClicked
 
     private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
-        
+        if (tblEstoque.getSelectedRow() != -1) {
+            ProdutoController prodC = new ProdutoController();
+            int linhaSelecionada = tblEstoque.getSelectedRow();
+            String textoCelula = tblEstoque.getValueAt(linhaSelecionada, 0).toString();
+            int idProduto = Integer.parseInt(textoCelula);
+            if (JOptionPane.showConfirmDialog(null, "tem certeza que deseja deletar esse produto?") == 0) {
+                prodC.removerProduto(idProduto);
+                pesquisar();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum produto selecionado");
+        }
     }//GEN-LAST:event_btnDeletarMouseClicked
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+      pesquisar();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void pesquisar(){
+         //Pega o modelo da grade com suas colunas
+        // o 
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblEstoque.getModel();
+
+        //Limpa a grade setando o número de linhas para zero
+        modeloTabela.setNumRows(0);
+
+        //Cria um UsuarioController para poder acessar os dados de tbusuario
+        ProdutoController produtor = new ProdutoController();
+
+        //consulta os usuários e guarda a lista de usuários que encontrou
+        List<Produto> listaProdutos = produtor.listar();
+
+        //Preencher a grade
+        //percorre todos os usuários presentes na lista
+        for (Produto prod : listaProdutos) {
+            //cria um array onde cada posição é o valor das colunas da grade
+            Object[] linha = {
+                prod.getId(),
+                prod.getTitulo(),
+                prod.getPreco(),
+                prod.getQuantidade(),
+                prod.getEditora(),
+                prod.getProdutor(),
+                prod.getAno(),
+                prod.getDuracao()
+            };
+
+            //Adiciona o array com os dados do usuário na grade
+            modeloTabela.addRow(linha);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -203,20 +264,21 @@ public class frEstoque extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frEstoque dialog = new frEstoque(new javax.swing.JFrame(), true);
+                frProdutos dialog = new frProdutos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
