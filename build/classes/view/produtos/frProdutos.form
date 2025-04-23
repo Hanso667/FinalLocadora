@@ -89,8 +89,10 @@
                               <Component id="btnAlterar" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnDeletar" min="-2" pref="70" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                              <Component id="btnVoltar" pref="123" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnGeneros" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="btnVoltar" pref="111" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -104,8 +106,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAlterar" alignment="3" pref="68" max="32767" attributes="0"/>
                           <Component id="btnNovo" alignment="3" pref="68" max="32767" attributes="0"/>
-                          <Component id="btnDeletar" alignment="3" pref="68" max="32767" attributes="0"/>
+                          <Component id="btnGeneros" alignment="3" pref="68" max="32767" attributes="0"/>
                           <Component id="btnVoltar" alignment="3" pref="68" max="32767" attributes="0"/>
+                          <Component id="btnDeletar" alignment="3" pref="68" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane25" pref="200" max="32767" attributes="0"/>
@@ -125,7 +128,7 @@
                 <Component class="javax.swing.JTable" name="tblEstoque">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="8" rowCount="4">
+                      <Table columnCount="9" rowCount="4">
                         <Column editable="false" title="id" type="java.lang.Integer"/>
                         <Column editable="false" title="titulo" type="java.lang.String"/>
                         <Column editable="false" title="pre&#xe7;o" type="java.lang.Double"/>
@@ -134,10 +137,16 @@
                         <Column editable="true" title="produtor" type="java.lang.String"/>
                         <Column editable="true" title="ano" type="java.lang.Integer"/>
                         <Column editable="true" title="dura&#xe7;&#xe3;o" type="java.lang.Integer"/>
+                        <Column editable="true" title="generos" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -203,12 +212,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNovoMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnDeletar">
+            <Component class="javax.swing.JButton" name="btnGeneros">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Deletar"/>
+                <Property name="text" type="java.lang.String" value="Generos"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDeletarMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGenerosMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnVoltar">
@@ -217,6 +226,14 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnVoltarMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnDeletar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Deletar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDeletarMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

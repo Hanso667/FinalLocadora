@@ -11,7 +11,18 @@ public class Produto {
     private int quantidade;
     private int duracao;
     private double preco;
+    private String generos;
 
+    public String getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(String generos) {
+        this.generos = generos;
+    }
+
+    
+    
     public int getId() {
         return id;
     }

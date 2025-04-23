@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
+import view.generos.frAlterarGenero;
 
 /**
  *
@@ -26,10 +27,10 @@ public class frProdutos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width+17;
-        int screenHeight = screenSize.height-163;
+        int screenWidth = screenSize.width + 17;
+        int screenHeight = screenSize.height - 163;
         this.setSize(screenWidth, screenHeight);
-        this.setLocation(-10,123);
+        this.setLocation(-10, 123);
     }
 
     /**
@@ -47,8 +48,9 @@ public class frProdutos extends javax.swing.JDialog {
         tblEstoque = new javax.swing.JTable();
         btnAlterar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
+        btnGeneros = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -64,20 +66,20 @@ public class frProdutos extends javax.swing.JDialog {
 
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "titulo", "preço", "quantidade", "editora", "produtor", "ano", "duração"
+                "id", "titulo", "preço", "quantidade", "editora", "produtor", "ano", "duração", "generos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true, true
+                false, false, false, false, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -104,10 +106,10 @@ public class frProdutos extends javax.swing.JDialog {
             }
         });
 
-        btnDeletar.setText("Deletar");
-        btnDeletar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGeneros.setText("Generos");
+        btnGeneros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeletarMouseClicked(evt);
+                btnGenerosMouseClicked(evt);
             }
         });
 
@@ -115,6 +117,13 @@ public class frProdutos extends javax.swing.JDialog {
         btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVoltarMouseClicked(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeletarMouseClicked(evt);
             }
         });
 
@@ -132,8 +141,10 @@ public class frProdutos extends javax.swing.JDialog {
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel50Layout.setVerticalGroup(
@@ -143,8 +154,9 @@ public class frProdutos extends javax.swing.JDialog {
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                    .addComponent(btnGeneros, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
@@ -191,8 +203,24 @@ public class frProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNovoMouseClicked
 
     private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
-        
+        pesquisar();
     }//GEN-LAST:event_btnAlterarMouseClicked
+
+    private void btnGenerosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerosMouseClicked
+        if (tblEstoque.getSelectedRow() != -1) {
+            int linhaSelecionada = tblEstoque.getSelectedRow();
+            String textoCelula = tblEstoque.getValueAt(linhaSelecionada, 0).toString();
+            int idProduto = Integer.parseInt(textoCelula);
+            new frAddGenero(this, rootPaneCheckingEnabled,idProduto).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum genero selecionado");
+        }
+        pesquisar();
+    }//GEN-LAST:event_btnGenerosMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        pesquisar();
+    }//GEN-LAST:event_formWindowOpened
 
     private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
         if (tblEstoque.getSelectedRow() != -1) {
@@ -208,13 +236,9 @@ public class frProdutos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Nenhum produto selecionado");
         }
     }//GEN-LAST:event_btnDeletarMouseClicked
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-      pesquisar();
-    }//GEN-LAST:event_formWindowOpened
-
-    private void pesquisar(){
-         //Pega o modelo da grade com suas colunas
+    
+    private void pesquisar() {
+        //Pega o modelo da grade com suas colunas
         // o 
         DefaultTableModel modeloTabela = (DefaultTableModel) tblEstoque.getModel();
 
@@ -222,10 +246,10 @@ public class frProdutos extends javax.swing.JDialog {
         modeloTabela.setNumRows(0);
 
         //Cria um UsuarioController para poder acessar os dados de tbusuario
-        ProdutoController produtor = new ProdutoController();
+        ProdutoController produto = new ProdutoController();
 
         //consulta os usuários e guarda a lista de usuários que encontrou
-        List<Produto> listaProdutos = produtor.listar();
+        List<Produto> listaProdutos = produto.listar();
 
         //Preencher a grade
         //percorre todos os usuários presentes na lista
@@ -239,14 +263,15 @@ public class frProdutos extends javax.swing.JDialog {
                 prod.getEditora(),
                 prod.getProdutor(),
                 prod.getAno(),
-                prod.getDuracao()
+                prod.getDuracao(),
+                prod.getGeneros()
             };
 
             //Adiciona o array com os dados do usuário na grade
             modeloTabela.addRow(linha);
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -293,6 +318,7 @@ public class frProdutos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnGeneros;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel49;
