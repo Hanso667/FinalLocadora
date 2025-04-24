@@ -9,9 +9,55 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Produtor;
 import model.Usuario;
 
 public class UsuarioController {
+
+    public Usuario consultarUsuario(int id) {
+        //Guarda o sql
+        String sql = "SELECT * FROM usuarios "
+                + "where id_usuario = ?";
+
+        //Cria um gerenciador de conexão
+        GerenciadorConexao gerenciador = new GerenciadorConexao();
+        //Cria as variáveis vazias antes do try pois vão ser usadas no finally
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+
+        //Crio a lista de usuários vazia
+        Usuario prod = new Usuario();
+
+        try {
+            //Preparo do comando sql
+            comando = gerenciador.prepararComando(sql);
+
+            comando.setInt(1, id);
+
+            //Como não há parâmetros já executo direto
+            resultado = comando.executeQuery();
+
+            //Irá percorrer os registros do resultado do sql
+            //A cada next() a variavel resultado aponta para o próximo registro 
+            //enquanto next() == true quer dizer que tem registros
+            while (resultado.next()) {
+                prod.setCodigo(resultado.getInt("id_usuario"));
+                prod.setNome(resultado.getString("nome"));
+                prod.setEmail(resultado.getString("email"));
+                prod.setTipo(resultado.getString("tipo"));
+                prod.setCriacao(resultado.getDate("data_criacao"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        } finally {
+            gerenciador.fecharConexao(comando, resultado);
+        }
+
+        //retorno a lista de usuários
+        return prod;
+    }
 
     public boolean autenticar(String email, String senha) {
         //Montar o comando a ser executado
@@ -48,58 +94,58 @@ public class UsuarioController {
         }
         return false;
     }
-    
+
     public List<Usuario> listar() {
-    //Guarda o sql
-    String sql = "SELECT * FROM usuarios";
-    
-    //Cria um gerenciador de conexão
-    GerenciadorConexao gerenciador = new GerenciadorConexao();
-    //Cria as variáveis vazias antes do try pois vão ser usadas no finally
-    PreparedStatement comando = null;
-    ResultSet resultado = null;
-    
-    //Crio a lista de usuários vazia
-    List<Usuario> listaUsuarios = new ArrayList<>();
-    
-    try {
-      //Preparo do comando sql
-      comando = gerenciador.prepararComando(sql);
+        //Guarda o sql
+        String sql = "SELECT * FROM usuarios";
 
-      //Como não há parâmetros já executo direto
-      resultado = comando.executeQuery();
+        //Cria um gerenciador de conexão
+        GerenciadorConexao gerenciador = new GerenciadorConexao();
+        //Cria as variáveis vazias antes do try pois vão ser usadas no finally
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
 
-      //Irá percorrer os registros do resultado do sql
-      //A cada next() a variavel resultado aponta para o próximo registro 
-      //enquanto next() == true quer dizer que tem registros
-      while (resultado.next()) {
+        //Crio a lista de usuários vazia
+        List<Usuario> listaUsuarios = new ArrayList<>();
 
-        //Crio um novo usuário vazio
-        Usuario usuario = new Usuario();
+        try {
+            //Preparo do comando sql
+            comando = gerenciador.prepararComando(sql);
 
-        //Leio as informações da variável resultado e guardo no usuário
-        usuario.setCodigo(resultado.getInt("id_usuario"));
-        usuario.setNome(resultado.getString("nome"));
-        usuario.setEmail(resultado.getString("email"));
-        usuario.setSenha(resultado.getString("senha"));
-        usuario.setTipo(resultado.getString("tipo"));
-        usuario.setCriacao(resultado.getDate("data_criacao"));
+            //Como não há parâmetros já executo direto
+            resultado = comando.executeQuery();
 
-        //adiciono o usuário na lista
-        listaUsuarios.add(usuario);
-      }
+            //Irá percorrer os registros do resultado do sql
+            //A cada next() a variavel resultado aponta para o próximo registro 
+            //enquanto next() == true quer dizer que tem registros
+            while (resultado.next()) {
 
-    } catch (SQLException ex) {
-      Logger.getLogger(UsuarioController.class.getName()).log(
-              Level.SEVERE, null, ex);
-    } finally {
-      gerenciador.fecharConexao(comando, resultado);
+                //Crio um novo usuário vazio
+                Usuario usuario = new Usuario();
+
+                //Leio as informações da variável resultado e guardo no usuário
+                usuario.setCodigo(resultado.getInt("id_usuario"));
+                usuario.setNome(resultado.getString("nome"));
+                usuario.setEmail(resultado.getString("email"));
+                usuario.setSenha(resultado.getString("senha"));
+                usuario.setTipo(resultado.getString("tipo"));
+                usuario.setCriacao(resultado.getDate("data_criacao"));
+
+                //adiciono o usuário na lista
+                listaUsuarios.add(usuario);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        } finally {
+            gerenciador.fecharConexao(comando, resultado);
+        }
+
+        //retorno a lista de usuários
+        return listaUsuarios;
     }
 
-    //retorno a lista de usuários
-    return listaUsuarios;
-  }
-    
     public boolean inserirUsuario(Usuario usu) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
@@ -149,7 +195,7 @@ public class UsuarioController {
         GerenciadorConexao gerenciador = new GerenciadorConexao();
         //Declara as variáveis como nulas antes do try para poder usar no finally
         PreparedStatement comando = null;
-        
+
         try {
             //prepara o sql, analisando o formato e as váriaveis
             comando = gerenciador.prepararComando(sql);
@@ -159,15 +205,14 @@ public class UsuarioController {
             int num = 1;
             comando.setString(num++, usu.getNome());
             comando.setString(num++, usu.getEmail());
-            
+
             if (atualizarSenha) {
                 comando.setString(num++, usu.getSenha());
             }
             comando.setString(num++, usu.getTipo());
             comando.setInt(num++, id);
-            
+
             comando.executeUpdate();
-            
 
             return true;
         } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
@@ -182,7 +227,7 @@ public class UsuarioController {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
         String sql = "delete from usuarios"
-                   + " where id_usuario = ? ";
+                + " where id_usuario = ? ";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();

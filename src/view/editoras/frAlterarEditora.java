@@ -20,6 +20,11 @@ public class frAlterarEditora extends javax.swing.JDialog {
         initComponents();
         txtCodigo1.setEditable(false);
         txtCodigo1.setText(String.valueOf(id));
+        EditoraController edc = new EditoraController();
+        Editora edt = edc.consultarEditora(id);
+        txtCodigo1.setText(String.valueOf(edt.getId()));
+        txtNome.setText(edt.getNome());
+        txtPais1.setText(edt.getPais());
     }
 
     /**
@@ -53,7 +58,7 @@ public class frAlterarEditora extends javax.swing.JDialog {
         jLabel29.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(0, 0, 0));
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel29.setText("Inserção de Editora");
+        jLabel29.setText("Alteração de Editora");
 
         jLabel30.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(0, 0, 0));
@@ -232,27 +237,16 @@ public class frAlterarEditora extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel5;
     private javax.swing.JButton btnCancel6;
-    private javax.swing.JButton btnConfirm1;
     private javax.swing.JButton btnConfirm2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JPanel jPanel59;
-    private javax.swing.JPanel jPanel60;
     private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel62;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCodigo1;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNome1;
-    private javax.swing.JTextField txtPais;
     private javax.swing.JTextField txtPais1;
     // End of variables declaration//GEN-END:variables
 }

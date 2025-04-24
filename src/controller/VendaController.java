@@ -12,9 +12,47 @@ import javax.swing.JOptionPane;
 import model.Produto;
 import model.Venda;
 import java.util.Date;
+import model.ItemVenda;
 
 public class VendaController {
 
+    public Venda consultarVenda(int id) {
+    String sqlV = "SELECT * FROM vendas WHERE id_venda = ?";
+    String sqlIv = "SELECT * FROM itens_venda";
+
+    GerenciadorConexao gerenciador = new GerenciadorConexao();
+    PreparedStatement comandoV = null;
+    PreparedStatement comandoIv = null;
+    ResultSet resultadoV = null;
+    ResultSet resultadoIv = null;
+
+    Venda venda = new Venda();
+
+    try {
+        // Consulta da venda
+        comandoV = gerenciador.prepararComando(sqlV);
+        comandoV.setInt(1, id);
+        resultadoV = comandoV.executeQuery();
+
+        if (resultadoV.next()) {
+            venda.setId(id);
+            venda.setClienteId(resultadoV.getInt("id_cliente"));
+            venda.setUsuarioId(resultadoV.getInt("id_usuario"));
+            venda.setVencimento(resultadoV.getDate("data_vencimento"));
+            venda.setStatus(resultadoV.getString("status"));
+            venda.setTotal(resultadoV.getDouble("total"));
+        }
+
+    } catch (SQLException ex) {
+        Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        gerenciador.fecharConexao(comandoV, resultadoV);
+        gerenciador.fecharConexao(comandoIv, resultadoIv);
+    }
+
+    return venda;
+}
+    
     public Venda consultar(int id) {
 
         String sql = "SELECT * FROM vendas";
@@ -107,7 +145,7 @@ public class VendaController {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
         String sql = "INSERT INTO vendas(id_cliente,id_usuario,data_vencimento,total) "
-                + " VALUES (?,?,?,?,?) ";
+                + " VALUES (?,?,?,?) ";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -120,7 +158,7 @@ public class VendaController {
             comando.setInt(1, ven.getClienteId());
             comando.setInt(2, ven.getUsuarioId());
             comando.setDate(3, ven.getVencimento());
-            comando.setDouble(5, ven.getTotal());
+            comando.setDouble(4, ven.getTotal());
 
             //define o valor de cada variável(?) pela posição em que aparece no sql
             //Executa o insert

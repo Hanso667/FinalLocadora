@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Venda {
 
@@ -14,6 +15,15 @@ public class Venda {
     private String status;
     private double total;
     private ArrayList<Produto> itens;
+    private List<ItemVenda> itensVenda = new ArrayList<>();
+
+    public List<ItemVenda> getItensVenda() {
+        return itensVenda;
+    }
+
+    public void setItensVenda(List<ItemVenda> itens) {
+        this.itensVenda = itens;
+    }
 
     public int getClienteId() {
         return ClienteId;
@@ -31,9 +41,6 @@ public class Venda {
         this.usuarioId = usuarioId;
     }
 
-    
-    
-    
     public ArrayList<Produto> getItens() {
         return itens;
     }

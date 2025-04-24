@@ -15,6 +15,53 @@ import java.util.Date;
 
 public class ProdutoController {
 
+    public Produto consultarProduto(int id) {
+        //Guarda o sql
+        String sql = "SELECT * FROM produtos "
+                + "where id_produto = ?";
+
+        //Cria um gerenciador de conexão
+        GerenciadorConexao gerenciador = new GerenciadorConexao();
+        //Cria as variáveis vazias antes do try pois vão ser usadas no finally
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+
+        //Crio a lista de usuários vazia
+        Produto prod = new Produto();
+
+        try {
+            //Preparo do comando sql
+            comando = gerenciador.prepararComando(sql);
+
+            comando.setInt(1, id);
+
+            //Como não há parâmetros já executo direto
+            resultado = comando.executeQuery();
+
+            //Irá percorrer os registros do resultado do sql
+            //A cada next() a variavel resultado aponta para o próximo registro 
+            //enquanto next() == true quer dizer que tem registros
+            while (resultado.next()) {
+                prod.setId(resultado.getInt("id_produto"));
+                prod.setTitulo(resultado.getString("titulo"));
+                prod.setAno(resultado.getInt("ano_lancamento"));
+                prod.setEditora(String.valueOf(resultado.getInt("id_editora")));
+                prod.setProdutor(String.valueOf(resultado.getInt("id_produtor")));
+                prod.setPreco(resultado.getInt("preco"));
+                prod.setQuantidade(resultado.getInt("estoque"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        } finally {
+            gerenciador.fecharConexao(comando, resultado);
+        }
+
+        //retorno a lista de usuários
+        return prod;
+    }
+    
     public List<Genero> listarGeneros(int produto) {
         //Guarda o sql
         String sql = "select * from produto_genero as pdtg "

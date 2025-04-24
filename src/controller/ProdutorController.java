@@ -14,6 +14,51 @@ import java.util.Date;
 
 public class ProdutorController {
     
+    public Produtor consultarProdutor(int id) {
+    //Guarda o sql
+    String sql = "SELECT * FROM produtores "
+            + "where id_produtor = ?";
+    
+    //Cria um gerenciador de conexão
+    GerenciadorConexao gerenciador = new GerenciadorConexao();
+    //Cria as variáveis vazias antes do try pois vão ser usadas no finally
+    PreparedStatement comando = null;
+    ResultSet resultado = null;
+    
+    //Crio a lista de usuários vazia
+    Produtor prod = new Produtor();
+    
+    try {
+      //Preparo do comando sql
+      comando = gerenciador.prepararComando(sql);
+      
+      comando.setInt(1,id);
+
+      //Como não há parâmetros já executo direto
+      resultado = comando.executeQuery();
+
+      //Irá percorrer os registros do resultado do sql
+      //A cada next() a variavel resultado aponta para o próximo registro 
+      //enquanto next() == true quer dizer que tem registros
+      while (resultado.next()) {
+          prod.setId(resultado.getInt("id_produtor"));
+          prod.setNome(resultado.getString("nome"));
+          prod.setNascimento(resultado.getDate("data_nascimento"));
+          prod.setNacionalidade(resultado.getString("nacionalidade"));
+
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(ClienteController.class.getName()).log(
+              Level.SEVERE, null, ex);
+    } finally {
+      gerenciador.fecharConexao(comando, resultado);
+    }
+
+    //retorno a lista de usuários
+    return prod;
+  }
+    
     public List<Produtor> listar() {
     //Guarda o sql
     String sql = "SELECT * FROM produtores";

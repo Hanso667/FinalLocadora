@@ -136,7 +136,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Inser&#xe7;&#xe3;o de Editora"/>
+                <Property name="text" type="java.lang.String" value="Altera&#xe7;&#xe3;o de Editora"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel30">

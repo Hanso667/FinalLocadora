@@ -20,6 +20,15 @@ public class frAlterarProduto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.id = id;
+        ProdutoController edc = new ProdutoController();
+        Produto edt = edc.consultarProduto(id);
+        txtTitulo.setText(edt.getTitulo());
+        txtDuracao.setText(String.valueOf(edt.getDuracao()));
+        txtAnoLançamento.setText(String.valueOf(edt.getAno()));
+        txtEditora.setText(edt.getEditora());
+        txtProdutor.setText(edt.getProdutor());
+        txtQuantidade.setText(String.valueOf(edt.getQuantidade()));
+        txtPreco.setText(String.valueOf(edt.getPreco()));
     }
 
     /**

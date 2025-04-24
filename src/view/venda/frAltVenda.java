@@ -18,6 +18,8 @@ import model.Usuario;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import model.ItemVenda;
 
 public class frAltVenda extends javax.swing.JDialog {
 
@@ -30,6 +32,11 @@ public class frAltVenda extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.id = id;
+        VendaController venC = new VendaController();
+        Venda ven = venC.consultarVenda(id);
+        txtCliente.setText(ven.getCliente());
+        txtUsuario.setText(ven.getUsuario());
+        txtVencimento.setText(String.valueOf(ven.getVencimento()));
     }
 
     /**

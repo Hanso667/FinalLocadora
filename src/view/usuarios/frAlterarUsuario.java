@@ -28,6 +28,12 @@ public class frAlterarUsuario extends javax.swing.JDialog {
         txtSenhaC.setBackground(Color.gray);
         txtId.setEditable(false);
         txtId.setText(String.valueOf(id));
+        UsuarioController edc = new UsuarioController();
+        Usuario edt = edc.consultarUsuario(id);
+        txtId.setText(String.valueOf(edt.getCodigo()));
+        txtNome.setText(edt.getNome());
+        txtEmail.setText(edt.getEmail());
+        
         
     }
 

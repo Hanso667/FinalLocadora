@@ -21,6 +21,12 @@ public class frAlterarProdutor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         txtCodigo.setText(String.valueOf(id));
+        ProdutorController edc = new ProdutorController();
+        Produtor edt = edc.consultarProdutor(id);
+        txtCodigo.setText(String.valueOf(edt.getId()));
+        txtNome.setText(edt.getNome());
+        txtNascimento.setText(String.valueOf(edt.getNascimento()));
+        txtNacionalidade.setText(edt.getNacionalidade());
     }
 
     /**

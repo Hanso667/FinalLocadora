@@ -9,9 +9,53 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Cliente;
 import model.Editora;
 
 public class EditoraController {
+    
+    public Editora consultarEditora(int id) {
+    //Guarda o sql
+    String sql = "SELECT * FROM editoras "
+            + "where id_editora = ?";
+    
+    //Cria um gerenciador de conexão
+    GerenciadorConexao gerenciador = new GerenciadorConexao();
+    //Cria as variáveis vazias antes do try pois vão ser usadas no finally
+    PreparedStatement comando = null;
+    ResultSet resultado = null;
+    
+    //Crio a lista de usuários vazia
+    Editora editora = new Editora();
+    
+    try {
+      //Preparo do comando sql
+      comando = gerenciador.prepararComando(sql);
+      
+      comando.setInt(1,id);
+
+      //Como não há parâmetros já executo direto
+      resultado = comando.executeQuery();
+
+      //Irá percorrer os registros do resultado do sql
+      //A cada next() a variavel resultado aponta para o próximo registro 
+      //enquanto next() == true quer dizer que tem registros
+      while (resultado.next()) {
+          editora.setId(resultado.getInt("id_editora"));
+          editora.setNome(resultado.getString("nome"));
+          editora.setPais(resultado.getString("pais"));
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(ClienteController.class.getName()).log(
+              Level.SEVERE, null, ex);
+    } finally {
+      gerenciador.fecharConexao(comando, resultado);
+    }
+
+    //retorno a lista de usuários
+    return editora;
+  }
     
     public List<Editora> listar() {
     //Guarda o sql

@@ -23,6 +23,11 @@ public class frAlterarGenero extends javax.swing.JDialog {
         this.id = id;
         txtCodigo.setText(String.valueOf(id));
         txtCodigo.setEditable(false);
+        GeneroController edc = new GeneroController();
+        Genero edt = edc.consultarGenero(id);
+        txtCodigo.setText(String.valueOf(edt.getId()));
+        txtNome.setText(edt.getNome());
+  
     }
 
     /**
