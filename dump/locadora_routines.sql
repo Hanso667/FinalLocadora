@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: locadora
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Server version	5.5.5-10.4.27-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,31 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `produto_genero`
+-- Dumping events for database 'locadora'
 --
 
-DROP TABLE IF EXISTS `produto_genero`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `produto_genero` (
-  `id_genero` int(11) NOT NULL,
-  `id_produto` int(11) NOT NULL,
-  KEY `id_genero` (`id_genero`),
-  KEY `id_produto` (`id_produto`),
-  CONSTRAINT `produto_genero_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id_genero`),
-  CONSTRAINT `produto_genero_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
--- Dumping data for table `produto_genero`
+-- Dumping routines for database 'locadora'
 --
-
-LOCK TABLES `produto_genero` WRITE;
-/*!40000 ALTER TABLE `produto_genero` DISABLE KEYS */;
-INSERT INTO `produto_genero` VALUES (2,1),(3,1),(8,9),(30,9);
-/*!40000 ALTER TABLE `produto_genero` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +32,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-23 16:46:41
+-- Dump completed on 2025-04-23 22:18:02

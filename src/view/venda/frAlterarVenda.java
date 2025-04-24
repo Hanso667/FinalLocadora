@@ -13,10 +13,13 @@ public class frAlterarVenda extends javax.swing.JDialog {
     /**
      * Creates new form frAlterarVenda
      */
-    public frAlterarVenda(java.awt.Frame parent, boolean modal) {
+    int id = 0;
+    
+    public frAlterarVenda(javax.swing.JDialog parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         this.setLocation(400,123);
+        this.id = id;
     }
 
     /**
@@ -110,7 +113,7 @@ public class frAlterarVenda extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frAlterarVenda dialog = new frAlterarVenda(new javax.swing.JFrame(), true);
+                frAlterarVenda dialog = new frAlterarVenda(new javax.swing.JDialog(), true,0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

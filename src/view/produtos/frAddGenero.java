@@ -163,6 +163,7 @@ public class frAddGenero extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancel7MouseClicked

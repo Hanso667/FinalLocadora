@@ -4,9 +4,14 @@
  */
 package view.venda;
 
+import controller.VendaController;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Venda;
+import view.produtos.frAddGenero;
 
 /**
  *
@@ -14,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class frVendas extends javax.swing.JDialog {
 
-    public String tipo = "funcionario";
+    public String tipo = "admin";
     
     public frVendas(java.awt.Frame parent, boolean modal, String tipo) {
         super(parent, modal);
@@ -46,6 +51,11 @@ public class frVendas extends javax.swing.JDialog {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel49.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -54,20 +64,20 @@ public class frVendas extends javax.swing.JDialog {
 
         tblVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Cliente", "Usuario", "Vencimento", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -181,7 +191,16 @@ public class frVendas extends javax.swing.JDialog {
 
     private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
         if(tipo.equals("admin")){
-            
+             if (tblVendas.getSelectedRow() != -1) {
+            int linhaSelecionada = tblVendas.getSelectedRow();
+            String textoCelula = tblVendas.getValueAt(linhaSelecionada, 0).toString();
+            int idProduto = Integer.parseInt(textoCelula);
+            new frAlterarVenda(this, rootPaneCheckingEnabled, idProduto).setVisible(true);
+            pesquisar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum genero selecionado");
+        }
+        //pesquisar();
         }else{
             JOptionPane.showMessageDialog(null, "permissão de admin necessaria para acessar essa pagina");
         }
@@ -189,12 +208,49 @@ public class frVendas extends javax.swing.JDialog {
 
     private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
         if(tipo.equals("admin")){
-            
+            pesquisar();
         }else{
             JOptionPane.showMessageDialog(null, "permissão de admin necessaria para acessar essa pagina");
         }
     }//GEN-LAST:event_btnDeletarMouseClicked
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        pesquisar();
+    }//GEN-LAST:event_formWindowOpened
+
+    public void pesquisar(){
+    //Pega o modelo da grade com suas colunas
+    // o 
+    DefaultTableModel modeloTabela = (DefaultTableModel) tblVendas.getModel();
+
+    //Limpa a grade setando o número de linhas para zero
+    modeloTabela.setNumRows(0);
+
+    //Cria um UsuarioController para poder acessar os dados de tbusuario
+    VendaController venda = new VendaController();
+    
+    //consulta os usuários e guarda a lista de usuários que encontrou
+    List<Venda> listaVendas = venda.listar();
+    
+    //Preencher a grade
+    //percorre todos os usuários presentes na lista
+    for (Venda Ven : listaVendas) {
+      //cria um array onde cada posição é o valor das colunas da grade
+      Object[] linha = {
+          Ven.getId(),
+          Ven.getCliente(),
+          Ven.getUsuario(),
+          Ven.getVencimento(),
+          Ven.getStatus(),
+          Ven.getTotal()
+      };
+      
+      //Adiciona o array com os dados do usuário na grade
+      modeloTabela.addRow(linha);
+    }
+  }
+        
+    
     /**
      * @param args the command line arguments
      */
@@ -225,7 +281,7 @@ public class frVendas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frVendas dialog = new frVendas(new javax.swing.JFrame(), true, "funcionario");
+                frVendas dialog = new frVendas(new javax.swing.JFrame(), true, "admin");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: locadora
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Server version	5.5.5-10.4.27-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,7 +34,7 @@ CREATE TABLE `vendas` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
   CONSTRAINT `vendas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `vendas` (
 
 LOCK TABLES `vendas` WRITE;
 /*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (1,NULL,NULL,NULL,'valido',150.00),(2,NULL,NULL,NULL,'vencido',300.00),(3,NULL,NULL,NULL,'quitado',200.00),(4,NULL,NULL,NULL,'valido',450.00),(5,NULL,NULL,NULL,'vencido',130.00),(6,NULL,NULL,NULL,'quitado',320.00),(7,NULL,NULL,NULL,'valido',220.00),(8,NULL,NULL,NULL,'vencido',550.00),(9,NULL,NULL,NULL,'quitado',180.00),(10,NULL,NULL,NULL,'valido',500.00),(11,NULL,NULL,NULL,'vencido',140.00),(12,NULL,NULL,NULL,'quitado',420.00),(13,NULL,NULL,NULL,'valido',210.00),(14,NULL,NULL,NULL,'vencido',360.00),(15,NULL,NULL,NULL,'quitado',190.00),(16,NULL,NULL,NULL,'valido',310.00),(17,NULL,NULL,NULL,'vencido',170.00),(18,NULL,NULL,NULL,'quitado',480.00),(19,NULL,NULL,NULL,'valido',160.00),(20,NULL,NULL,NULL,'vencido',470.00),(21,NULL,NULL,NULL,'quitado',200.00),(22,NULL,NULL,NULL,'valido',450.00),(23,NULL,NULL,NULL,'vencido',220.00),(24,NULL,NULL,NULL,'quitado',380.00),(25,NULL,NULL,NULL,'valido',230.00),(26,NULL,NULL,NULL,'vencido',490.00),(27,NULL,NULL,NULL,'quitado',250.00),(28,NULL,NULL,NULL,'valido',530.00),(29,NULL,NULL,NULL,'vencido',240.00),(30,NULL,NULL,NULL,'quitado',460.00);
+INSERT INTO `vendas` VALUES (33,1,1,'2005-03-10','quitado',10.00);
 /*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-23 16:46:41
+-- Dump completed on 2025-04-23 22:18:02
