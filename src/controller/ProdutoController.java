@@ -67,23 +67,26 @@ public class ProdutoController {
 
     public Produto consultar(int id) {
 
-        String sql = "SELECT * FROM produtos";
+        String sql = "SELECT * FROM produtos "
+                   + "where id_produto = ?";
 
         GerenciadorConexao gerenciador = new GerenciadorConexao();
 
         PreparedStatement comando = null;
         ResultSet resultado = null;
 
-        Produto Produto = new Produto();
+        Produto produto = new Produto();
 
         try {
 
             comando = gerenciador.prepararComando(sql);
 
+            comando.setInt(1, id);
+            
             resultado = comando.executeQuery();
 
-            Produto produto = new Produto();
-
+            
+            
             if (resultado.next()) {
 
                 produto.setId(resultado.getInt("id_produto"));
@@ -105,7 +108,7 @@ public class ProdutoController {
         }
 
         //retorno a lista de usuários
-        return Produto;
+        return produto;
     }
 
     public List<Produto> listar() {

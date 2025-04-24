@@ -1,8 +1,7 @@
-
 package model;
 
 public class Produto {
-    
+
     private int id;
     private String titulo;
     private String editora;
@@ -21,8 +20,6 @@ public class Produto {
         this.generos = generos;
     }
 
-    
-    
     public int getId() {
         return id;
     }
@@ -86,7 +83,10 @@ public class Produto {
     public void setPreco(double preco) {
         this.preco = preco;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Produto{id=" + id + ", titulo='" + titulo + "', preco=" + preco + "}";
+    }
+
 }

@@ -4,15 +4,22 @@
  */
 package view.venda;
 
+import controller.ProdutoController;
+import controller.VendaController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.Produto;
+import model.Venda;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Cliente
  */
 public class frNovaVenda extends javax.swing.JDialog {
 
-    /**
-     * Creates new form frNovaVenda
-     */
+    ArrayList<Produto> listaProdutos = new ArrayList<>();
+    
     public frNovaVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -32,7 +39,7 @@ public class frNovaVenda extends javax.swing.JDialog {
         txtCliente = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
         btnConfirmar = new javax.swing.JButton();
         btnRemProduto = new javax.swing.JButton();
         btnAddProduto = new javax.swing.JButton();
@@ -53,7 +60,7 @@ public class frNovaVenda extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -69,13 +76,18 @@ public class frNovaVenda extends javax.swing.JDialog {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProdutos);
 
         btnConfirmar.setText("Confirmar");
 
         btnRemProduto.setText("Remover");
 
         btnAddProduto.setText("Adcionar");
+        btnAddProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddProdutoMouseClicked(evt);
+            }
+        });
 
         btnAltProduto.setText("Alterar");
 
@@ -235,6 +247,23 @@ public class frNovaVenda extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    private void btnAddProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddProdutoMouseClicked
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblProdutos.getModel();
+        ProdutoController prodC = new ProdutoController();
+        int[] value = new frSelProdutos(this, rootPaneCheckingEnabled).getValue();
+        Produto prod = prodC.consultar(value[0]);
+        JOptionPane.showMessageDialog(null, prod);
+        Object[] linha = {
+                prod.getId(),
+                prod.getTitulo(),
+                value[1],
+                prod.getPreco(),
+                prod.getPreco()*value[1],
+            };
+        modeloTabela.addRow(linha);
+        listaProdutos.add(prod);
+    }//GEN-LAST:event_btnAddProdutoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -292,7 +321,7 @@ public class frNovaVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JFormattedTextField txtVencimento;

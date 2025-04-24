@@ -14,60 +14,10 @@ import model.Venda;
 import java.util.Date;
 
 public class VendaController {
-/*
-    public List<Produto> listarGeneros(int produto) {
-        //Guarda o sql
-        String sql = "select * from produto_genero as pdtg "
-                + "left join generos as gen on gen.id_genero = pdtg.id_genero "
-                + "where pdtg.id_produto = ?";
 
-        GerenciadorConexao gerenciador = new GerenciadorConexao();
-        //Cria as variáveis vazias antes do try pois vão ser usadas no finally
-        PreparedStatement comando = null;
-        ResultSet resultado = null;
+    public Venda consultar(int id) {
 
-        //Crio a lista de usuários vazia
-        List<Genero> listaGeneros = new ArrayList<>();
-
-        try {
-            //Preparo do comando sql
-            comando = gerenciador.prepararComando(sql);
-
-            comando.setInt(1, produto);
-
-            //Como não há parâmetros já executo direto
-            resultado = comando.executeQuery();
-
-            //Irá percorrer os registros do resultado do sql
-            //A cada next() a variavel resultado aponta para o próximo registro 
-            //enquanto next() == true quer dizer que tem registros
-            while (resultado.next()) {
-
-                //Crio um novo usuário vazio
-                Genero genero = new Genero();
-
-                //Leio as informações da variável resultado e guardo no usuário
-                genero.setId(resultado.getInt("id_genero"));
-                genero.setNome(resultado.getString("nome"));
-
-                //adiciono o usuário na lista
-                listaGeneros.add(genero);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutorController.class.getName()).log(
-                    Level.SEVERE, null, ex);
-        } finally {
-            gerenciador.fecharConexao(comando, resultado);
-        }
-
-        //retorno a lista de usuários
-        return listaGeneros;
-    }
-
-    public Produto consultar(int id) {
-
-        String sql = "SELECT * FROM produtos";
+        String sql = "SELECT * FROM vendas";
 
         GerenciadorConexao gerenciador = new GerenciadorConexao();
 
@@ -76,24 +26,17 @@ public class VendaController {
 
         Produto Produto = new Produto();
 
+        Venda venda = new Venda();
+
         try {
 
             comando = gerenciador.prepararComando(sql);
 
             resultado = comando.executeQuery();
 
-            Produto produto = new Produto();
-
             if (resultado.next()) {
 
-                produto.setId(resultado.getInt("id_produto"));
-                produto.setTitulo(resultado.getString("titulo"));
-                produto.setAno(resultado.getInt("ano_lancamento"));
-                produto.setEditora(resultado.getString("id_editora"));
-                produto.setProdutor(resultado.getString("id_produtor"));
-                produto.setDuracao(resultado.getInt("duracao"));
-                produto.setPreco(resultado.getDouble("preco"));
-                produto.setQuantidade(resultado.getInt("estoque"));
+                venda.setId(resultado.getInt("id_venda"));
 
             }
 
@@ -105,14 +48,14 @@ public class VendaController {
         }
 
         //retorno a lista de usuários
-        return Produto;
+        return venda;
     }
-*/
+
     public List<Venda> listar() {
         //Guarda o sql
         String sql = "select * from vendas as ven "
-                   + "left join usuarios as usu on usu.id_usuario = ven.id_usuario "
-                   + "left join clientes as cli on cli.id_cliente = ven.id_cliente";
+                + "left join usuarios as usu on usu.id_usuario = ven.id_usuario "
+                + "left join clientes as cli on cli.id_cliente = ven.id_cliente";
 
         GerenciadorConexao gerenciador = new GerenciadorConexao();
         //Cria as variáveis vazias antes do try pois vão ser usadas no finally
@@ -159,12 +102,12 @@ public class VendaController {
         //retorno a lista de usuários
         return listaVendas;
     }
-/*
-    public boolean inserirProduto(Produto prod) {
+
+    public boolean inserirVenda(Venda ven) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "INSERT INTO produtos(titulo,ano_lancamento,duracao,id_editora,id_produtor,preco,estoque) "
-                + " VALUES (?,?,?,?,?,?,?) ";
+        String sql = "INSERT INTO vendas(id_cliente,id_usuario,data_vencimento,status,total) "
+                + " VALUES (?,?,?,?,?) ";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -174,13 +117,7 @@ public class VendaController {
             //prepara o sql, analisando o formato e as váriaveis
             comando = gerenciador.prepararComando(sql);
 
-            comando.setString(1, prod.getTitulo());
-            comando.setInt(2, prod.getAno());
-            comando.setInt(3, prod.getDuracao());
-            comando.setString(4, prod.getEditora());
-            comando.setString(5, prod.getProdutor());
-            comando.setInt(6, prod.getQuantidade());
-            comando.setDouble(7, prod.getPreco());
+            comando.setInt(1, ven.getId());
 
             //define o valor de cada variável(?) pela posição em que aparece no sql
             //Executa o insert
@@ -188,18 +125,18 @@ public class VendaController {
 
             return true;
         } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao inserir o produto: " + e.getMessage());//exibe popup com o erro
+            JOptionPane.showMessageDialog(null, "Erro ao inserir a venda: " + e.getMessage());//exibe popup com o erro
         } finally {//depois de executar o try, dando erro ou não executa o finally
             gerenciador.fecharConexao(comando);
         }
         return false;
     }
 
-    public boolean inserirGenero(int produto, int genero) {
+    public boolean inserirProduto(int produto, int venda, int quantidade, double preco) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "INSERT INTO produto_genero(id_produto,id_genero) "
-                + " VALUES (?,?) ";
+        String sql = "INSERT INTO itens_venda(id_produto,id_venda, quantidade, preco_unitario) "
+                + " VALUES (?,?,?,?) ";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -210,7 +147,43 @@ public class VendaController {
             comando = gerenciador.prepararComando(sql);
 
             comando.setInt(1, produto);
-            comando.setInt(2, genero);
+            comando.setInt(2, venda);
+            comando.setInt(3, quantidade);
+            comando.setDouble(4, preco);
+
+            //define o valor de cada variável(?) pela posição em que aparece no sql
+            //Executa o insert
+            comando.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
+            JOptionPane.showMessageDialog(null, "Erro ao inserir o produto: " + e.getMessage());//exibe popup com o erro
+        } finally {//depois de executar o try, dando erro ou não executa o finally
+            gerenciador.fecharConexao(comando);
+        }
+        return false;
+    }
+    
+    public boolean alterarProduto(int produto, int venda, int quantidade, double preco) {
+        //Montar o comando a ser executado
+        //os ? são variáveis que são preenchidas mais adiante
+        String sql = "update itens_venda "
+                   + "set id_produto = ? ,  quantidade = ? , preco_unitario = ? "
+                   + "where id_produto = ? and id_venda = ?";
+
+        //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
+        GerenciadorConexao gerenciador = new GerenciadorConexao();
+        //Declara as variáveis como nulas antes do try para poder usar no finally
+        PreparedStatement comando = null;
+        try {
+            //prepara o sql, analisando o formato e as váriaveis
+            comando = gerenciador.prepararComando(sql);
+
+            comando.setInt(1, produto);
+            comando.setInt(2, quantidade);
+            comando.setDouble(3, preco);
+            comando.setInt(4, produto);
+            comando.setInt(5, venda);
 
             //define o valor de cada variável(?) pela posição em que aparece no sql
             //Executa o insert
@@ -225,12 +198,42 @@ public class VendaController {
         return false;
     }
 
-    public boolean alterarProduto(Produto prod, int id) {
+    public boolean RemoverProduto(int produto, int venda) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "UPDATE produtos "
-                + "set titulo = ?, ano_lancamento = ?, duracao = ? , id_editora = ?, id_produtor = ?, estoque = ?, preco = ?"
-                + "where id_editora = ?";
+        String sql = "remove from itens_venda(id_produto,id_venda) "
+                + " where id_produto = ? and id_venda = ? ";
+
+        //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
+        GerenciadorConexao gerenciador = new GerenciadorConexao();
+        //Declara as variáveis como nulas antes do try para poder usar no finally
+        PreparedStatement comando = null;
+        try {
+            //prepara o sql, analisando o formato e as váriaveis
+            comando = gerenciador.prepararComando(sql);
+
+            comando.setInt(1, produto);
+            comando.setInt(2, venda);
+
+            //define o valor de cada variável(?) pela posição em que aparece no sql
+            //Executa o insert
+            comando.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
+            JOptionPane.showMessageDialog(null, "Erro ao remover o produto: " + e.getMessage());//exibe popup com o erro
+        } finally {//depois de executar o try, dando erro ou não executa o finally
+            gerenciador.fecharConexao(comando);
+        }
+        return false;
+    }
+
+    public boolean alterarVenda(Produto prod, int id) {
+        //Montar o comando a ser executado
+        //os ? são variáveis que são preenchidas mais adiante
+        String sql = "UPDATE vendas "
+                + "set id_cliente = ?, id_usuario = ?, vencimento = ? , status = ?, total = ?"
+                + "where id_venda = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -242,30 +245,23 @@ public class VendaController {
             comando = gerenciador.prepararComando(sql);
 
             comando.setString(1, prod.getTitulo());
-            comando.setInt(2, prod.getAno());
-            comando.setInt(3, prod.getDuracao());
-            comando.setString(4, prod.getEditora());
-            comando.setString(5, prod.getProdutor());
-            comando.setInt(6, prod.getQuantidade());
-            comando.setDouble(7, prod.getPreco());
-            comando.setInt(8, id);
 
             comando.executeUpdate();
 
             return true;
         } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto: " + e.getMessage());//exibe popup com o erro
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar a venda: " + e.getMessage());//exibe popup com o erro
         } finally {//depois de executar o try, dando erro ou não executa o finally
             gerenciador.fecharConexao(comando);
         }
         return false;
     }
 
-    public boolean removerProduto(int id) {
+    public boolean removerVenda(int id) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "delete from produtos"
-                + " where id_produto = ?";
+        String sql = "delete from vendas"
+                + " where venda = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
@@ -281,39 +277,10 @@ public class VendaController {
 
             return true;
         } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao remover o produto: " + e.getMessage());//exibe popup com o erro
+            JOptionPane.showMessageDialog(null, "Erro ao remover a venda: " + e.getMessage());//exibe popup com o erro
         } finally {//depois de executar o try, dando erro ou não executa o finally
             gerenciador.fecharConexao(comando);
         }
         return false;
     }
-
-    public boolean removerGenero(int produto, int genero) {
-        //Montar o comando a ser executado
-        //os ? são variáveis que são preenchidas mais adiante
-        String sql = "delete from produto_genero"
-                + " where id_produto = ? and id_genero = ?";
-
-        //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
-        GerenciadorConexao gerenciador = new GerenciadorConexao();
-        //Declara as variáveis como nulas antes do try para poder usar no finally
-        PreparedStatement comando = null;
-        try {
-            //prepara o sql, analisando o formato e as váriaveis
-            comando = gerenciador.prepararComando(sql);
-
-            comando.setInt(1, produto);
-            comando.setInt(2, genero);
-
-            comando.executeUpdate();
-
-            return true;
-        } catch (SQLException e) {//caso ocorra um erro relacionado ao banco de dados
-            JOptionPane.showMessageDialog(null, "Erro ao remover o produto: " + e.getMessage());//exibe popup com o erro
-        } finally {//depois de executar o try, dando erro ou não executa o finally
-            gerenciador.fecharConexao(comando);
-        }
-        return false;
-    }
-*/
 }
