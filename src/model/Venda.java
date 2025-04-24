@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Venda {
 
@@ -10,6 +11,15 @@ public class Venda {
     private Date vencimento;
     private String status;
     private double total;
+    private ArrayList<Produto> itens;
+
+    public ArrayList<Produto> getItens() {
+        return itens;
+    }
+
+    public void setItens(ArrayList<Produto> itens) {
+        this.itens = itens;
+    }
 
     public int getId() {
         return id;
