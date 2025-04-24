@@ -18,30 +18,34 @@ USE `locadora`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `produto_genero`
+-- Table structure for table `vendas`
 --
 
-DROP TABLE IF EXISTS `produto_genero`;
+DROP TABLE IF EXISTS `vendas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `produto_genero` (
-  `id_genero` int(11) NOT NULL,
-  `id_produto` int(11) NOT NULL,
-  KEY `id_genero` (`id_genero`),
-  KEY `id_produto` (`id_produto`),
-  CONSTRAINT `produto_genero_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id_genero`),
-  CONSTRAINT `produto_genero_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `vendas` (
+  `id_venda` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `data_vencimento` date DEFAULT NULL,
+  `status` enum('valido','vencido','quitado') DEFAULT 'valido',
+  `total` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id_venda`),
+  KEY `id_cliente` (`id_cliente`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
+  CONSTRAINT `vendas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `produto_genero`
+-- Dumping data for table `vendas`
 --
 
-LOCK TABLES `produto_genero` WRITE;
-/*!40000 ALTER TABLE `produto_genero` DISABLE KEYS */;
-INSERT INTO `produto_genero` VALUES (2,1),(3,1),(8,9),(30,9);
-/*!40000 ALTER TABLE `produto_genero` ENABLE KEYS */;
+LOCK TABLES `vendas` WRITE;
+/*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-24  9:09:29
+-- Dump completed on 2025-04-24 17:48:14

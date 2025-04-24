@@ -186,7 +186,7 @@ public class frAddGenero extends javax.swing.JDialog {
         int produto = Integer.valueOf(txtProduto.getText());
 
 
-        if (prodC.inserirGenero(produto,genero)) {
+        if (prodC.inserirProduto(produto,genero)) {
             return true;
         } else {
             return false;

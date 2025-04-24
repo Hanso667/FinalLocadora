@@ -7,12 +7,33 @@ public class Venda {
 
     private int id;
     private String cliente;
+    private int ClienteId;
     private String usuario;
+    private int usuarioId;
     private Date vencimento;
     private String status;
     private double total;
     private ArrayList<Produto> itens;
 
+    public int getClienteId() {
+        return ClienteId;
+    }
+
+    public void setClienteId(int ClienteId) {
+        this.ClienteId = ClienteId;
+    }
+
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    
+    
+    
     public ArrayList<Produto> getItens() {
         return itens;
     }

@@ -206,7 +206,7 @@ public class ProdutoController {
         return false;
     }
 
-    public boolean inserirGenero(int produto, int genero) {
+    public boolean inserirProduto(int produto, int genero) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
         String sql = "INSERT INTO produto_genero(id_produto,id_genero) "

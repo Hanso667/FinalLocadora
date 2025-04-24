@@ -20,15 +20,15 @@ import view.produtos.frAddGenero;
 public class frVendas extends javax.swing.JDialog {
 
     public String tipo = "admin";
-    
+
     public frVendas(java.awt.Frame parent, boolean modal, String tipo) {
         super(parent, modal);
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width+17;
-        int screenHeight = screenSize.height-163;
+        int screenWidth = screenSize.width + 17;
+        int screenHeight = screenSize.height - 163;
         this.setSize(screenWidth, screenHeight);
-        this.setLocation(-10,123);
+        this.setLocation(-10, 123);
         this.tipo = tipo;
     }
 
@@ -190,26 +190,37 @@ public class frVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNovoMouseClicked
 
     private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
-        if(tipo.equals("admin")){
-             if (tblVendas.getSelectedRow() != -1) {
-            int linhaSelecionada = tblVendas.getSelectedRow();
-            String textoCelula = tblVendas.getValueAt(linhaSelecionada, 0).toString();
-            int idProduto = Integer.parseInt(textoCelula);
-            new frAlterarVenda(this, rootPaneCheckingEnabled, idProduto).setVisible(true);
-            pesquisar();
+        if (tipo.equals("admin")) {
+            if (tblVendas.getSelectedRow() != -1) {
+                int linhaSelecionada = tblVendas.getSelectedRow();
+                String textoCelula = tblVendas.getValueAt(linhaSelecionada, 0).toString();
+                int idProduto = Integer.parseInt(textoCelula);
+                new frAltVenda(this, rootPaneCheckingEnabled, idProduto).setVisible(true);
+                pesquisar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum genero selecionado");
+            }
+            //pesquisar();
         } else {
-            JOptionPane.showMessageDialog(null, "Nenhum genero selecionado");
-        }
-        //pesquisar();
-        }else{
             JOptionPane.showMessageDialog(null, "permissão de admin necessaria para acessar essa pagina");
         }
     }//GEN-LAST:event_btnAlterarMouseClicked
 
     private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
-        if(tipo.equals("admin")){
-            pesquisar();
-        }else{
+        if (tipo.equals("admin")) {
+            DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
+            VendaController venC = new VendaController();
+            if (tblVendas.getSelectedRow() != -1) {
+                int linhaSelecionada = tblVendas.getSelectedRow();
+                String textoCelula = tblVendas.getValueAt(linhaSelecionada, 0).toString();
+                int idVenda = Integer.parseInt(textoCelula);
+                modelo.removeRow(linhaSelecionada);
+                if (JOptionPane.showConfirmDialog(null, "tem certeza que deseja deletar essa venda?") == 0) {
+                    venC.removerVenda(idVenda);
+                    pesquisar();
+                }
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "permissão de admin necessaria para acessar essa pagina");
         }
     }//GEN-LAST:event_btnDeletarMouseClicked
@@ -218,39 +229,38 @@ public class frVendas extends javax.swing.JDialog {
         pesquisar();
     }//GEN-LAST:event_formWindowOpened
 
-    public void pesquisar(){
-    //Pega o modelo da grade com suas colunas
-    // o 
-    DefaultTableModel modeloTabela = (DefaultTableModel) tblVendas.getModel();
+    public void pesquisar() {
+        //Pega o modelo da grade com suas colunas
+        // o 
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblVendas.getModel();
 
-    //Limpa a grade setando o número de linhas para zero
-    modeloTabela.setNumRows(0);
+        //Limpa a grade setando o número de linhas para zero
+        modeloTabela.setNumRows(0);
 
-    //Cria um UsuarioController para poder acessar os dados de tbusuario
-    VendaController venda = new VendaController();
-    
-    //consulta os usuários e guarda a lista de usuários que encontrou
-    List<Venda> listaVendas = venda.listar();
-    
-    //Preencher a grade
-    //percorre todos os usuários presentes na lista
-    for (Venda Ven : listaVendas) {
-      //cria um array onde cada posição é o valor das colunas da grade
-      Object[] linha = {
-          Ven.getId(),
-          Ven.getCliente(),
-          Ven.getUsuario(),
-          Ven.getVencimento(),
-          Ven.getStatus(),
-          Ven.getTotal()
-      };
-      
-      //Adiciona o array com os dados do usuário na grade
-      modeloTabela.addRow(linha);
+        //Cria um UsuarioController para poder acessar os dados de tbusuario
+        VendaController venda = new VendaController();
+
+        //consulta os usuários e guarda a lista de usuários que encontrou
+        List<Venda> listaVendas = venda.listar();
+
+        //Preencher a grade
+        //percorre todos os usuários presentes na lista
+        for (Venda Ven : listaVendas) {
+            //cria um array onde cada posição é o valor das colunas da grade
+            Object[] linha = {
+                Ven.getId(),
+                Ven.getCliente(),
+                Ven.getUsuario(),
+                Ven.getVencimento(),
+                Ven.getStatus(),
+                Ven.getTotal()
+            };
+
+            //Adiciona o array com os dados do usuário na grade
+            modeloTabela.addRow(linha);
+        }
     }
-  }
-        
-    
+
     /**
      * @param args the command line arguments
      */

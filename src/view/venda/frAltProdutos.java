@@ -6,7 +6,9 @@
 package view.venda;
 
 import view.produtos.*;
+import java.util.Arrays;
 import controller.ProdutoController;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +18,12 @@ import model.Produto;
  *
  * @author aluno.saolucas
  */
-public class frSelProdutos extends javax.swing.JDialog {
+public class frAltProdutos extends javax.swing.JDialog {
 
     int value;
     int quantidade;
 
-    public frSelProdutos(javax.swing.JDialog parent, boolean modal) {
+    public frAltProdutos(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setVisible(true);
@@ -189,8 +191,8 @@ public class frSelProdutos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    public int[] getValue() {
-        return new int[]{value,quantidade};
+    public ArrayList<Integer> getValue() {
+        return new ArrayList<Integer>(Arrays.asList(value,quantidade));
     }
 
     /**
@@ -210,14 +212,18 @@ public class frSelProdutos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frSelProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frAltProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frSelProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frAltProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frSelProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frAltProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frSelProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frAltProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -226,7 +232,7 @@ public class frSelProdutos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frSelProdutos dialog = new frSelProdutos(new javax.swing.JDialog(), true);
+                frAltProdutos dialog = new frAltProdutos(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

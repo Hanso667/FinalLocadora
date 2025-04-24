@@ -3,7 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/aluno.saolucas/Desktop/FinalLocadora/src/view/produtos/frRemoverGeneros.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/controller/ProdutoController.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/view/venda/frNovaVenda.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/view/venda/frSelProdutos.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/view/venda/frVendas.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/view/venda/frSelCliente.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/controller/VendaController.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/model/Produto.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/view/venda/frSelUsuario.java</file>
+            <file>file:/C:/Users/Cliente/Desktop/FinalLocadora/src/model/Venda.java</file>
         </group>
     </open-files>
 </project-private>

@@ -18,27 +18,30 @@ USE `locadora`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `generos`
+-- Table structure for table `produto_genero`
 --
 
-DROP TABLE IF EXISTS `generos`;
+DROP TABLE IF EXISTS `produto_genero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `generos` (
-  `id_genero` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_genero`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `produto_genero` (
+  `id_genero` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  KEY `id_genero` (`id_genero`),
+  KEY `id_produto` (`id_produto`),
+  CONSTRAINT `produto_genero_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id_genero`),
+  CONSTRAINT `produto_genero_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `generos`
+-- Dumping data for table `produto_genero`
 --
 
-LOCK TABLES `generos` WRITE;
-/*!40000 ALTER TABLE `generos` DISABLE KEYS */;
-INSERT INTO `generos` VALUES (1,'indefinido'),(2,'Ficção'),(3,'Romance'),(4,'Aventura'),(5,'Mistério'),(6,'Terror'),(7,'Suspense'),(8,'Ficção Científica'),(9,'Fantasia'),(10,'Histórico'),(11,'Biografia'),(12,'Drama'),(13,'Comédia'),(14,'Poesia'),(15,'Tirinha'),(16,'Jornalismo'),(17,'Ensaios'),(18,'Crônica'),(19,'Antologia'),(20,'Literatura Infantojuvenil'),(21,'Literatura Jovem'),(22,'Psicológico'),(23,'Policial'),(24,'Erótico'),(25,'Humor'),(26,'Rebeldia'),(27,'Religião'),(28,'Espiritualidade'),(29,'Autoajuda'),(30,'Ciência'),(31,'Tecnologia');
-/*!40000 ALTER TABLE `generos` ENABLE KEYS */;
+LOCK TABLES `produto_genero` WRITE;
+/*!40000 ALTER TABLE `produto_genero` DISABLE KEYS */;
+INSERT INTO `produto_genero` VALUES (2,1),(3,1),(8,9),(30,9);
+/*!40000 ALTER TABLE `produto_genero` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-24  9:09:30
+-- Dump completed on 2025-04-24 17:48:14

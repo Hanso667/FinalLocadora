@@ -106,7 +106,7 @@ public class VendaController {
     public boolean inserirVenda(Venda ven) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
-        String sql = "INSERT INTO vendas(id_cliente,id_usuario,data_vencimento,status,total) "
+        String sql = "INSERT INTO vendas(id_cliente,id_usuario,data_vencimento,total) "
                 + " VALUES (?,?,?,?,?) ";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
@@ -117,7 +117,10 @@ public class VendaController {
             //prepara o sql, analisando o formato e as váriaveis
             comando = gerenciador.prepararComando(sql);
 
-            comando.setInt(1, ven.getId());
+            comando.setInt(1, ven.getClienteId());
+            comando.setInt(2, ven.getUsuarioId());
+            comando.setDate(3, ven.getVencimento());
+            comando.setDouble(5, ven.getTotal());
 
             //define o valor de cada variável(?) pela posição em que aparece no sql
             //Executa o insert
@@ -228,11 +231,11 @@ public class VendaController {
         return false;
     }
 
-    public boolean alterarVenda(Produto prod, int id) {
+    public boolean alterarVenda(Venda ven, int id) {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
         String sql = "UPDATE vendas "
-                + "set id_cliente = ?, id_usuario = ?, vencimento = ? , status = ?, total = ?"
+                + "set id_cliente = ?, id_usuario = ?, data_vencimento = ? , status = ?, total = ?"
                 + "where id_venda = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
@@ -244,7 +247,12 @@ public class VendaController {
             //prepara o sql, analisando o formato e as váriaveis
             comando = gerenciador.prepararComando(sql);
 
-            comando.setString(1, prod.getTitulo());
+            comando.setInt(1, ven.getClienteId());
+            comando.setInt(2, ven.getUsuarioId());
+            comando.setDate(3, ven.getVencimento());
+            comando.setString(4, ven.getStatus());
+            comando.setDouble(5, ven.getTotal());
+            comando.setDouble(6, id);
 
             comando.executeUpdate();
 
@@ -261,7 +269,7 @@ public class VendaController {
         //Montar o comando a ser executado
         //os ? são variáveis que são preenchidas mais adiante
         String sql = "delete from vendas"
-                + " where venda = ?";
+                + " where id_venda = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();
