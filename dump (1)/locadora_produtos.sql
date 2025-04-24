@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `locadora` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `locadora`;
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: locadora
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.27-MariaDB
+-- Server version	5.5.5-10.4.32-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +47,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (1,'O Senhor dos Anéis: A Sociedade do Anel',NULL,178,1,1,12.99,30),(2,'Vingadores: Ultimato',NULL,181,1,1,15.00,25),(3,'A Origem',NULL,148,1,1,10.00,40),(4,'Jurassic Park',NULL,127,1,1,8.50,50),(5,'O Rei Leão',NULL,88,1,1,7.99,60),(6,'Forrest Gump',NULL,142,1,1,11.99,20),(7,'Matrix',NULL,136,1,1,9.50,35),(8,'Titanic',NULL,195,1,1,13.50,15),(9,'Interestelar',NULL,169,1,1,14.00,30),(10,'Star Wars: O Império Contra-Ataca',NULL,124,1,1,10.50,45),(11,'De Volta para o Futuro',NULL,116,1,1,8.00,50),(12,'Os Incríveis',NULL,115,1,1,9.00,40),(13,'Os Vingadores',NULL,143,1,1,12.00,30),(14,'Piratas do Caribe: A Maldição do Pérola Negra',NULL,143,1,1,11.50,20),(15,'Gladiador',NULL,155,1,1,12.99,25),(16,'O Hobbit: Uma Jornada Inesperada',NULL,169,1,1,13.50,30),(17,'Mad Max: Estrada da Fúria',NULL,120,1,1,10.00,40),(18,'O Exterminador do Futuro 2: O Julgamento Final',NULL,137,1,1,9.99,30),(19,'Jogos Vorazes',NULL,142,1,1,11.00,35),(20,'Harry Potter e a Pedra Filosofal',NULL,152,1,1,14.00,50),(21,'Shrek',NULL,90,1,1,7.99,60),(22,'Avatar',NULL,162,1,1,15.00,10),(23,'O Lobo de Wall Street',NULL,180,1,1,13.00,20),(24,'Coringa',NULL,122,1,1,10.50,30),(25,'O Profissional',NULL,110,1,1,9.00,40),(26,'O Grande Lebowski',NULL,117,1,1,8.50,50),(27,'Kill Bill: Volume 1',NULL,111,1,1,10.00,25),(28,'Batman: O Cavaleiro das Trevas',NULL,152,1,1,12.99,30),(29,'Os Suspeitos',NULL,106,1,1,8.00,45),(30,'A Vida é Bela',NULL,116,1,1,7.50,50);
+INSERT INTO `produtos` VALUES (1,'O Senhor dos Anéis: A Sociedade do Anel',NULL,178,1,1,12.99,30),(2,'vingadores',2000,254,4,8,2.00,2),(3,'A Origem',NULL,148,1,1,10.00,40),(4,'Jurassic Park',NULL,127,1,1,8.50,50),(5,'O Rei Leão',NULL,88,1,1,7.99,60),(6,'Forrest Gump',NULL,142,1,1,11.99,20),(7,'Matrix',NULL,136,1,1,9.50,35),(8,'Titanic',NULL,195,1,1,13.50,15),(9,'Interestelar',NULL,169,1,1,14.00,30),(10,'Star Wars: O Império Contra-Ataca',NULL,124,1,1,10.50,45),(11,'De Volta para o Futuro',NULL,116,1,1,8.00,50),(12,'Os Incríveis',NULL,115,1,1,9.00,40),(13,'Os Vingadores',NULL,143,1,1,12.00,30),(14,'Piratas do Caribe: A Maldição do Pérola Negra',NULL,143,1,1,11.50,20),(15,'Gladiador',NULL,155,1,1,12.99,25),(16,'O Hobbit: Uma Jornada Inesperada',NULL,169,1,1,13.50,30),(17,'Mad Max: Estrada da Fúria',NULL,120,1,1,10.00,40),(18,'O Exterminador do Futuro 2: O Julgamento Final',NULL,137,1,1,9.99,30),(19,'Jogos Vorazes',NULL,142,1,1,11.00,35),(20,'Harry Potter e a Pedra Filosofal',NULL,152,1,1,14.00,50),(21,'Shrek',NULL,90,1,1,7.99,60),(22,'Avatar',NULL,162,1,1,15.00,10),(23,'O Lobo de Wall Street',NULL,180,1,1,13.00,20),(24,'Coringa',NULL,122,1,1,10.50,30),(25,'O Profissional',NULL,110,1,1,9.00,40),(26,'O Grande Lebowski',NULL,117,1,1,8.50,50),(27,'Kill Bill: Volume 1',NULL,111,1,1,10.00,25),(28,'Batman: O Cavaleiro das Trevas',NULL,152,1,1,12.99,30),(29,'Os Suspeitos',NULL,106,1,1,8.00,45),(30,'A Vida é Bela',NULL,116,1,1,7.50,50);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-23 22:18:02
+-- Dump completed on 2025-04-24  9:09:30

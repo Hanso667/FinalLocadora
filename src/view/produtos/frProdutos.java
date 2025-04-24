@@ -214,7 +214,16 @@ public class frProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNovoMouseClicked
 
     private void btnAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseClicked
-        pesquisar();
+        if (tblEstoque.getSelectedRow() != -1) {
+            ProdutoController prodC = new ProdutoController();
+            int linhaSelecionada = tblEstoque.getSelectedRow();
+            String textoCelula = tblEstoque.getValueAt(linhaSelecionada, 0).toString();
+            int idProduto = Integer.parseInt(textoCelula);
+                new frAlterarProduto(this, rootPaneCheckingEnabled, idProduto).setVisible(true);
+                pesquisar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum produto selecionado");
+        }
     }//GEN-LAST:event_btnAlterarMouseClicked
 
     private void btnAddGenerosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddGenerosMouseClicked

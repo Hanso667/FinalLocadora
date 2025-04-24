@@ -238,7 +238,7 @@ public class ProdutoController {
         //os ? são variáveis que são preenchidas mais adiante
         String sql = "UPDATE produtos "
                 + "set titulo = ?, ano_lancamento = ?, duracao = ? , id_editora = ?, id_produtor = ?, estoque = ?, preco = ?"
-                + "where id_editora = ?";
+                + "where id_produto = ?";
 
         //Cria uma instância do gerenciador de conexão(conexão com o banco de dados),
         GerenciadorConexao gerenciador = new GerenciadorConexao();

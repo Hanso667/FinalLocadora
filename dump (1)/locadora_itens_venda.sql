@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `locadora` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `locadora`;
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: locadora
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.27-MariaDB
+-- Server version	5.5.5-10.4.32-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,35 +18,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `vendas`
+-- Table structure for table `itens_venda`
 --
 
-DROP TABLE IF EXISTS `vendas`;
+DROP TABLE IF EXISTS `itens_venda`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `vendas` (
-  `id_venda` int(11) NOT NULL AUTO_INCREMENT,
-  `id_cliente` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `data_vencimento` date DEFAULT NULL,
-  `status` enum('valido','vencido','quitado') NOT NULL,
-  `total` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id_venda`),
-  KEY `id_cliente` (`id_cliente`),
-  KEY `id_usuario` (`id_usuario`),
-  CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
-  CONSTRAINT `vendas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `itens_venda` (
+  `id_venda` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `quantidade` int(11) DEFAULT 1,
+  `preco_unitario` decimal(10,2) DEFAULT NULL,
+  KEY `id_venda` (`id_venda`),
+  KEY `id_produto` (`id_produto`),
+  CONSTRAINT `itens_venda_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `vendas` (`id_venda`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `itens_venda_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `vendas`
+-- Dumping data for table `itens_venda`
 --
 
-LOCK TABLES `vendas` WRITE;
-/*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (33,1,1,'2005-03-10','quitado',10.00);
-/*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
+LOCK TABLES `itens_venda` WRITE;
+/*!40000 ALTER TABLE `itens_venda` DISABLE KEYS */;
+/*!40000 ALTER TABLE `itens_venda` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-23 22:18:02
+-- Dump completed on 2025-04-24  9:09:30
